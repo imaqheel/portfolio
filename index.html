@@ -941,6 +941,90 @@
       color: #0a66c2;
     }
 
+    /* LinkedIn Glow Effect */
+    .linkedin-glow-link {
+      position: relative;
+      display: inline-grid;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+      color: #ffffff;
+      box-shadow:
+        0 0 12px rgba(10, 102, 194, 0.4),
+        0 0 24px rgba(10, 102, 194, 0.15);
+      transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 280ms ease,
+        background 280ms ease;
+    }
+
+    .linkedin-glow-link:hover {
+      transform: scale(1.12) translateY(-2px);
+      background: linear-gradient(135deg, #0077b5 0%, #005fa3 100%);
+      box-shadow:
+        0 0 18px rgba(10, 102, 194, 0.6),
+        0 0 40px rgba(10, 102, 194, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.15);
+      color: #ffffff;
+    }
+
+    .linkedin-icon-wrap {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Pulse rings */
+    .linkedin-pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      border: 2px solid rgba(10, 102, 194, 0.5);
+      animation: linkedinPulse 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      pointer-events: none;
+    }
+
+    .linkedin-pulse-ring--delay {
+      animation-delay: 1.4s;
+    }
+
+    @keyframes linkedinPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      70% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    .linkedin-glow-link:hover .linkedin-pulse-ring {
+      animation-duration: 1.8s;
+      border-color: rgba(10, 102, 194, 0.7);
+    }
+
+    .dark .linkedin-glow-link {
+      background: linear-gradient(135deg, #0a66c2 0%, #0077b5 100%);
+      box-shadow:
+        0 0 14px rgba(10, 102, 194, 0.5),
+        0 0 30px rgba(10, 102, 194, 0.2);
+    }
+
+    .dark .linkedin-glow-link:hover {
+      box-shadow:
+        0 0 22px rgba(10, 102, 194, 0.7),
+        0 0 50px rgba(10, 102, 194, 0.35),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
     .mobile-menu-toggle {
       display: none;
       width: 44px;
@@ -1045,6 +1129,7 @@
       }
 
       .brand-zone .nav-social-link,
+      .brand-zone .linkedin-glow-link,
       .nav-actions .nav-contact-link {
         display: none;
       }
@@ -1247,12 +1332,16 @@
             <small>Full Stack Web Developer</small>
           </span>
         </a>
-        <a href="https://www.linkedin.com/in/s-aqheel/" class="nav-social-link" target="_blank"
+        <a href="https://www.linkedin.com/in/s-aqheel/" class="linkedin-glow-link" target="_blank"
           rel="noopener noreferrer" aria-label="Connect on LinkedIn">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M6.94 8.98H3.72V19h3.22V8.98ZM5.34 4a1.86 1.86 0 1 0 0 3.72 1.86 1.86 0 0 0 0-3.72Zm13.94 9.55c0-3.02-1.61-4.43-3.76-4.43a3.24 3.24 0 0 0-2.94 1.62h-.04V8.98H9.46V19h3.2v-4.96c0-1.31.25-2.58 1.87-2.58 1.6 0 1.62 1.5 1.62 2.66V19h3.2v-5.45h-.07Z" />
-          </svg>
+          <span class="linkedin-pulse-ring" aria-hidden="true"></span>
+          <span class="linkedin-pulse-ring linkedin-pulse-ring--delay" aria-hidden="true"></span>
+          <span class="linkedin-icon-wrap">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M6.94 8.98H3.72V19h3.22V8.98ZM5.34 4a1.86 1.86 0 1 0 0 3.72 1.86 1.86 0 0 0 0-3.72Zm13.94 9.55c0-3.02-1.61-4.43-3.76-4.43a3.24 3.24 0 0 0-2.94 1.62h-.04V8.98H9.46V19h3.2v-4.96c0-1.31.25-2.58 1.87-2.58 1.6 0 1.62 1.5 1.62 2.66V19h3.2v-5.45h-.07Z" />
+            </svg>
+          </span>
         </a>
       </div>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
