@@ -28,6 +28,15 @@
     })();
   </script>
   <style>
+    /* Media Download Protection */
+    .protected-media {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
+      pointer-events: auto;
+    }
+
     /* Custom Cursor Styles */
     @media (pointer: fine) {
       body, a, button, [role="button"], input, select, textarea {
@@ -1409,8 +1418,9 @@
           <div class="w-full lg:w-2/5">
             <div
               class="group relative isolate h-[450px] w-full overflow-hidden rounded-3xl border border-slate-200/70 bg-slate-100 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)] sm:h-[480px] lg:h-full lg:min-h-[320px]">
-              <img class="block h-full w-full rounded-3xl object-cover object-top transition duration-500 group-hover:scale-[1.03]"
-                src="assets/images/profile.jpg" alt="Aqheel Thowheed" loading="lazy" />
+              <img class="block h-full w-full rounded-3xl object-cover object-top transition duration-500 group-hover:scale-[1.03] protected-media"
+                src="assets/images/profile.jpg" alt="Aqheel Thowheed" loading="lazy"
+                draggable="false" oncontextmenu="return false" />
               <div class="absolute inset-x-0 bottom-0 rounded-b-3xl bg-gradient-to-t from-slate-950 via-slate-950/78 to-transparent p-4 sm:p-6 pt-16 sm:pt-24">
                 <div class="flex flex-wrap items-end justify-between gap-3 sm:gap-4">
                   <div>
@@ -1504,7 +1514,9 @@
               <div
                 class="liquid-glass-media overflow-hidden rounded-[24px] border border-white/70 p-2">
                 <div class="relative aspect-[16/10] max-h-[200px] sm:max-h-[250px] md:max-h-[280px] lg:max-h-[300px] w-full overflow-hidden rounded-2xl bg-slate-950">
-                  <video class="absolute inset-0 h-full w-full rounded-xl object-cover" autoplay loop muted playsinline preload="metadata"
+                  <video class="absolute inset-0 h-full w-full rounded-xl object-cover protected-media" autoplay loop muted playsinline preload="metadata"
+                    controlsList="nodownload nofullscreen noremoteplayback" disableRemotePlayback
+                    oncontextmenu="return false"
                     aria-label="Safarix AI project looping preview">
                     <source src="assets/videos/safarixai.mp4" type="video/mp4" />
                   </video>
@@ -1582,7 +1594,9 @@
               <div
                 class="liquid-glass-media overflow-hidden rounded-[24px] border border-white/70 p-2">
                 <div class="relative aspect-[16/10] max-h-[200px] sm:max-h-[250px] md:max-h-[280px] lg:max-h-[300px] w-full overflow-hidden rounded-2xl bg-slate-950">
-                  <video class="absolute inset-0 h-full w-full rounded-xl object-cover" autoplay loop muted playsinline preload="metadata"
+                  <video class="absolute inset-0 h-full w-full rounded-xl object-cover protected-media" autoplay loop muted playsinline preload="metadata"
+                    controlsList="nodownload nofullscreen noremoteplayback" disableRemotePlayback
+                    oncontextmenu="return false"
                     aria-label="MyTank project looping preview">
                     <source src="assets/videos/tank-preview.mp4" type="video/mp4" />
                   </video>

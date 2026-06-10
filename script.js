@@ -959,3 +959,25 @@ initScrollReveal();
 initTextScramble();
 initProjectCarousels();
 
+// --- Media Download Protection ---
+(function () {
+  const protectedMedia = document.querySelectorAll(".protected-media");
+
+  protectedMedia.forEach((el) => {
+    // Block right-click context menu
+    el.addEventListener("contextmenu", (e) => e.preventDefault(), { passive: false });
+
+    // Block drag attempts
+    el.addEventListener("dragstart", (e) => e.preventDefault(), { passive: false });
+
+    // Block long-press on mobile (iOS Safari save image)
+    el.addEventListener("touchstart", () => {}, { passive: true });
+  });
+
+  // Block Ctrl+S (Save Page) on the whole document
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+      e.preventDefault();
+    }
+  });
+})();
