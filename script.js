@@ -981,3 +981,55 @@ initProjectCarousels();
     }
   });
 })();
+
+// --- Screenshot Deterrent for Profile Photo ---
+(function () {
+  const guard = document.querySelector(".screenshot-guard");
+  if (!guard) return;
+
+  let blurTimeout = null;
+
+  function blurPhoto() {
+    guard.classList.add("is-blurred");
+  }
+
+  function unblurPhoto() {
+    guard.classList.remove("is-blurred");
+  }
+
+  // Blur when tab/window loses focus (catches Snipping Tool, Alt+Tab, etc.)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      blurPhoto();
+    } else {
+      // Small delay before restoring to catch quick screenshot attempts
+      clearTimeout(blurTimeout);
+      blurTimeout = setTimeout(unblurPhoto, 300);
+    }
+  });
+
+  window.addEventListener("blur", blurPhoto);
+  window.addEventListener("focus", () => {
+    clearTimeout(blurTimeout);
+    blurTimeout = setTimeout(unblurPhoto, 300);
+  });
+
+  // Blur on Print Screen key press
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "PrintScreen" || e.key === "Snapshot") {
+      blurPhoto();
+      navigator.clipboard?.writeText?.("").catch(() => {});
+      clearTimeout(blurTimeout);
+      blurTimeout = setTimeout(unblurPhoto, 1500);
+    }
+  });
+
+  // Blur on Ctrl+Shift+S (Windows Snip & Sketch)
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "s" || e.key === "S")) {
+      blurPhoto();
+      clearTimeout(blurTimeout);
+      blurTimeout = setTimeout(unblurPhoto, 2000);
+    }
+  });
+})();
