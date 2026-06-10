@@ -821,24 +821,28 @@ class TextScrambler {
   }
 
   update() {
-    let output = "";
+    const fragment = document.createDocumentFragment();
     let complete = 0;
     for (let i = 0, n = this.queue.length; i < n; i++) {
       let { from, to, start, end, char } = this.queue[i];
       if (this.frame >= end) {
         complete++;
-        output += to;
+        fragment.appendChild(document.createTextNode(to));
       } else if (this.frame >= start) {
         if (!char || Math.random() < 0.28) {
           char = this.randomChar();
           this.queue[i].char = char;
         }
-        output += `<span class="text-sky-500 dark:text-sky-400 font-mono">${char}</span>`;
+        const span = document.createElement("span");
+        span.className = "text-sky-500 dark:text-sky-400 font-mono";
+        span.textContent = char;
+        fragment.appendChild(span);
       } else {
-        output += from;
+        fragment.appendChild(document.createTextNode(from));
       }
     }
-    this.el.innerHTML = output;
+    this.el.textContent = "";
+    this.el.appendChild(fragment);
     if (complete === this.queue.length) {
       this.resolve();
     } else {
