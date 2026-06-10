@@ -11,6 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Apply theme instantly before paint to prevent flash
+    (function(){
+      var t = localStorage.getItem("theme");
+      if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
   <style>
     /* Custom Cursor Styles */
     @media (pointer: fine) {
@@ -1111,7 +1120,7 @@
         min-height: 100vh;
         justify-content: flex-start !important;
         overflow: visible !important;
-        padding: 116px 16px 48px !important;
+        padding: 96px 16px 48px !important;
       }
 
       #home h1 {
@@ -1129,6 +1138,12 @@
         overflow-x: auto;
         white-space: pre;
         line-height: 1.65;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      #home pre::-webkit-scrollbar {
+        display: none;
       }
 
       #projects,
@@ -1138,8 +1153,8 @@
       #faq,
       #contact {
         overflow: visible !important;
-        padding-top: 104px !important;
-        padding-bottom: 48px !important;
+        padding-top: 84px !important;
+        padding-bottom: 32px !important;
       }
 
       video {
@@ -1266,7 +1281,7 @@
             </div>
           </div>
 
-          <div class="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-4 max-md:p-4 max-md:pb-4">
+          <div class="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-8 max-md:p-4 max-md:pb-4">
             <span class="liquid-glass-layer liquid-glass-center" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-bottom" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-stroke" aria-hidden="true"></span>
@@ -1749,7 +1764,7 @@
               </button>
             </div>
           </article>
-          <article
+          <article id="education-card"
             class="liquid-glass-card spotlight-card flex h-full flex-col rounded-[28px] p-5 md:p-6 lg:p-7">
             <span class="liquid-glass-layer liquid-glass-center" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-bottom" aria-hidden="true"></span>

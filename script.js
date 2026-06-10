@@ -220,7 +220,10 @@ function animateCounters() {
 function setupCounterObserver() {
   state.counterObserver?.disconnect();
 
-  if (!experienceSection || counters.length === 0) {
+  const educationCard = document.querySelector("#education-card");
+  const observeTarget = educationCard || experienceSection;
+
+  if (!observeTarget || counters.length === 0) {
     return;
   }
 
@@ -235,11 +238,11 @@ function setupCounterObserver() {
     },
     {
       root: null,
-      threshold: 0.55,
+      threshold: 0.3,
     },
   );
 
-  state.counterObserver.observe(experienceSection);
+  state.counterObserver.observe(observeTarget);
 }
 
 function resetAboutCounter() {
@@ -513,6 +516,7 @@ function initThemeToggle() {
 
   const sunIcon = themeToggle.querySelector(".sun-icon");
   const moonIcon = themeToggle.querySelector(".moon-icon");
+  const systemDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   function applyTheme(isDark) {
     if (isDark) {
@@ -526,11 +530,17 @@ function initThemeToggle() {
     }
   }
 
-  // Initial check
+  // Initial check — respect saved preference, otherwise follow system
   const savedTheme = localStorage.getItem("theme");
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const isDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
+  const isDark = savedTheme === "dark" || (!savedTheme && systemDarkQuery.matches);
   applyTheme(isDark);
+
+  // Live listener: if system theme changes and user hasn't manually picked, follow along
+  systemDarkQuery.addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(e.matches);
+    }
+  });
 
   themeToggle.addEventListener("click", () => {
     const currentlyDark = document.documentElement.classList.contains("dark");
