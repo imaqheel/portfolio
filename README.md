@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio website for Abubacker Siddiq J.
+Personal portfolio website for Aqheel Thowheed S.
 
 ## Stack
 
